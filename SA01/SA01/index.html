@@ -95,6 +95,25 @@
     </div>
 </main>
 
+<div class="contact-form" style="margin: 20px 0; padding: 20px; background-color: #f9f9f9; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <h2 style="color: #333;">Entre em Contato</h2>
+  <form action="enviar_mensagem.php" method="POST">
+      <div style="margin-bottom: 15px;">
+          <label for="nome" style="font-weight: bold; color: #555;">Nome:</label><br>
+          <input type="text" id="nome" name="nome" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"/>
+      </div>
+      <div style="margin-bottom: 15px;">
+          <label for="email" style="font-weight: bold; color: #555;">E-mail:</label><br>
+          <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;"/>
+      </div>
+      <div style="margin-bottom: 15px;">
+          <label for="mensagem" style="font-weight: bold; color: #555;">Mensagem:</label><br>
+          <textarea id="mensagem" name="mensagem" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; height: 100px;"></textarea>
+      </div>
+      <button type="submit" style="background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer;">Enviar</button>
+  </form>
+</div>
+
 <footer class="footer text-center">
     <div class="container">
         <p class="mb-1">© 2024 Loja de Sapatos - Todos os direitos reservados.</p>

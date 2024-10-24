@@ -56,3 +56,11 @@ def tabuada(num: int):
       html+=f"<li> {num}x{i}={num*i}</li>"
     return html + '</ul>'
 
+@app.route("/tabuada")
+@app.route("/tabuada/<numero>",methods=("GET",))
+def tabuada(numero = None): # None desobriga o valor
+    
+    if 'numero' in request.args: # se argumento existir
+        numero = request.args.get('numero') # atualiza numero
+
+    return render_template('tabuada.html', numero=numero)

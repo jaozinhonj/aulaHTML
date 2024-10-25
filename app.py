@@ -1,17 +1,15 @@
-from flask import (Flask, request) #Importa o flask
+from flask import (Flask, flash, redirect, render_template, request, url_for)
 
-app = Flask(__name__) #Cria uma instância
+app.secret_key = 'segredo'  # Para utilizar flash messages
+app = Flask(_name_) #Cria uma instância
 
 @app.route("/", methods=('GET' ,)) #Assina uma rota
 def index (): #Função responsavel pela página
     nome = request.args.get('nome')
     #HTML retornado
-    return f"""<h1>Pagina Inicial</h1> 
+    return f"""<h1>Pagina Inicial</h1> <p>Eu sou Mary</p>
     <p>Olá {nome}, que nome bonito!<p>
     """
-@app.route("/outra_pagina", methods=( 'GET', )) 
-def outra():
-   return "<h1>Outra página</h1>"
 
 @app.route("/galeria", methods=('GET',))
 def galeria():
@@ -26,12 +24,13 @@ def sobre():
     return "<h1>Sobre...</h1>" 
 
 
-
+# Dia 11/10
+# Multiplicação
 @app.route("/area/<float:altura>/<float:largura>", methods=('GET',))
 def area(altura: float, largura: float):
     return f"""<h1>A área informada> L={largura}*A={altura} => Área={largura*altura}</h1>"""
 
-
+# Número Par ou Impar
 @app.route("/numero/<float:parimpar>", methods=('GET',))
 def numero(parimpar: float):
   if numero % 2 == 0:
@@ -39,28 +38,27 @@ def numero(parimpar: float):
   else:
     return f"O número é ímpar."
 
-@app.route("/sobrenome/<string:nome>/<string:sobrenome>", methods=('GET',))
-def nomesobrenome(nome: str, sobrenome: str):
-  return f"""<h1> sobrenome </h1>
+# Nome e Sobrenome 
+@app.route("/nome", methods=('GET',))
+def nome():
+  nome = request.args.get('nome')
+  sobrenome = request.args.get('sobrenome')
+  return f"""<h1> Resultado </h1>
   <p>{sobrenome},{nome}</p>"""
 
-
+# 17/10
+# Potencia
 @app.route("/potencia/<float:numero>/<float:elevado>", methods=('GET',))
 def potencia(numero: float, elevado: float):
-    return f"""<h1>A potencia é> N={numero}** E={elevado} => Potencia={numero**elevado}</h1>"""
+    return f"""<h1>A potencia é> N={numero}* E={elevado} => Potencia={numero*elevado}</h1>"""
 
-@app.route("/tabuada/<int:num>", methods=['GET'])
-def tabuada(num: int):   
-    html="<ul>"  
-    for i in range (1,11):
-      html+=f"<li> {num}x{i}={num*i}</li>"
-    return html + '</ul>'
-
+# 18/10
+# Tabuada
 @app.route("/tabuada")
-@app.route("/tabuada/<numero>",methods=("GET",))
-def tabuada(numero = None): # None desobriga o valor
-    
-    if 'numero' in request.args: # se argumento existir
-        numero = request.args.get('numero') # atualiza numero
+@app.route("/tabuada/<numero>", methods=("GET", ))
+def tabuada(numero = None):
 
-    return render_template('tabuada.html', numero=numero)
+  if 'numero' in request.args:
+    numero = int(request.args.get('numero'))
+  
+  return render_template('tabuada.html',numero=numero)
